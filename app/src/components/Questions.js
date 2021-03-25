@@ -13,6 +13,8 @@ const questionArray = [
 const A1 = ["no", "no"];
 const A1_2 = ["no", "yes", "yes"];
 const G2 = ["no", "yes", "no"];
+const C1 = ["yes", "no", "no", "yes", "yes", "yes"];
+const C1_2 = ["yes", "yes", "no", "yes", "yes", "yes", "yes"];
 const C2 = ["yes", "no", "no", "no"];
 const A1_3 = ["yes", "no", "yes"];
 const A2 = ["yes", "no", "no", "yes", "no"];
@@ -25,6 +27,35 @@ const A2_3 = ["yes", "yes", "yes", "yes"];
 const G2_4 = ["yes", "yes", "yes", "no", "yes"];
 const C2_4 = ["yes", "yes", "yes", "no", "no"];
 
+const options = [
+  [
+    "A1 - Autocratic",
+    "You make the decision and inform others of it.",
+    "You use the information you already have and make the decision",
+  ],
+  [
+    "A2 - Autocratic",
+    "You make the decision and inform others of it.",
+    "you ask team members for specific information and once you have it, you make the decision. Here you don't necessarily tell them what the information is needed for",
+  ],
+  [
+    "C1 - Consultative",
+    "You gather information from the team and other and then make the decision.",
+    "You inform team members of what you are doing and may individually ask opinions, however, the group is not brought together for discussion. You make the decision.",
+  ],
+  [
+    "C2 - Consultative",
+    "You gather information from the team and other and then make the decision.",
+    "You are responsible for making the decision, however, you get together as a group to discuss the situation, hear other perspectives, and solicit suggestions.",
+  ],
+  [
+    "G2 - Collaborative",
+    "You and your team work together to reach a consensus.",
+    "The team makes a decision together. Your role is mostly",
+    "facilitative and you help the team come to a final decision that everyone agrees on.",
+  ],
+];
+
 export default function Questions() {
   const [count, setCount] = useState(1);
   const [questionDisplay, setQuestionDisplay] = useState(questionArray[0]);
@@ -32,22 +63,75 @@ export default function Questions() {
   const [answersArray, setAnswersArray] = useState([]);
 
   const [finalPage, setFinalPage] = useState(false);
+  const [result, setResult] = useState();
 
   const handleAnswer = (answer) => {
     const newAnswersArray = answersArray.push(answer);
     if (count < 7) {
       setQuestionDisplay(questionArray[count]);
       setCount(count + 1);
-    } else {
-      setFinalPage(true);
+
+      const stringArray = answersArray.toString();
+
+      //A1:
+      if (
+        stringArray === A1.toString() ||
+        stringArray === A1_2.toString() ||
+        stringArray === A1_3.toString() ||
+        stringArray === A1_4.toString()
+      ) {
+        setFinalPage(true);
+        setResult(options[0]);
+      }
+
+      //A2:
+      if (
+        stringArray === A2.toString() ||
+        stringArray === A2_2.toString() ||
+        stringArray === A2_3.toString()
+      ) {
+        setFinalPage(true);
+        setResult(options[1]);
+      }
+      //C1:
+      if (stringArray === C1.toString() || stringArray === C1_2.toString()) {
+        setFinalPage(true);
+        setResult(options[2]);
+      }
+      //C2:
+      if (
+        stringArray === C2.toString() ||
+        stringArray === C2_2.toString() ||
+        stringArray === C2_3.toString() ||
+        stringArray === C2_4.toString()
+      ) {
+        setFinalPage(true);
+        setResult(options[3]);
+      }
+      //G2:
+      if (
+        stringArray === G2.toString() ||
+        stringArray === G2_3.toString() ||
+        stringArray === G2_4.toString()
+      ) {
+        setFinalPage(true);
+        setResult(options[4]);
+      }
+
+      //
+      //   if (stringArray === A1.toString()) {
+      //     setFinalPage(true);
+      //     setResult(options[0]);
+      //   }
+      // } else {
+      //   setFinalPage(true);
     }
     console.log(
       "answers Array",
       answersArray,
       "new Answers array",
       newAnswersArray,
-      newAnswersArray.toString(),
-      A1.toString()
+      answersArray.toString() === A1.toString()
     );
   };
 
@@ -55,7 +139,10 @@ export default function Questions() {
     <div>
       {finalPage ? (
         <div>
-          <div>Congrats! Here's your decision:</div>
+          <div>Congrats! Your style is: </div>
+          <div>{result[0]}</div>
+          <div>Your Style: {result[1]}</div>
+          <div>Process: {result[2]}</div>
         </div>
       ) : (
         <div>

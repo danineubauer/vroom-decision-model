@@ -7,16 +7,18 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              <WelcomePage />
-            </Route>
-            <Route path="/question-page">
-              <Questions />
-            </Route>
-          </Switch>
-        </Router>
+        <div style={{ maxWidth: "1000px" }}>
+          <Router>
+            <Switch>
+              <Route exact path="/">
+                <WelcomePage />
+              </Route>
+              <Route path="/question-page">
+                <Questions />
+              </Route>
+            </Switch>
+          </Router>
+        </div>
       </header>
     </div>
   );
