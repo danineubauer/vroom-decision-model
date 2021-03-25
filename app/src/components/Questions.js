@@ -46,7 +46,8 @@ export default function Questions() {
       answersArray,
       "new Answers array",
       newAnswersArray,
-      A1
+      newAnswersArray.toString(),
+      A1.toString()
     );
   };
 
@@ -59,7 +60,6 @@ export default function Questions() {
       ) : (
         <div>
           <div>Question {count}</div>
-
           <div>
             <div style={{ margin: "20px" }}>{questionDisplay}</div>
             <button onClick={() => handleAnswer("yes")}>Yes</button>
