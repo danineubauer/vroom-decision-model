@@ -11,8 +11,13 @@ const questionArray = [
 ];
 
 const A1 = ["no", "no"];
+const A1_Jump = ["no", "yes"];
+
 const A1_2 = ["no", "yes", "yes"];
 const G2 = ["no", "yes", "no"];
+
+const Jump_to_question_5 = ["yes", "yes", "yes"];
+
 const C1 = ["yes", "no", "no", "yes", "yes", "yes"];
 const C1_2 = ["yes", "yes", "no", "yes", "yes", "yes", "yes"];
 const C2 = ["yes", "no", "no", "no"];
@@ -26,6 +31,7 @@ const G2_3 = ["yes", "yes", "no", "no", "no", "yes"];
 const A2_3 = ["yes", "yes", "yes", "yes"];
 const G2_4 = ["yes", "yes", "yes", "no", "yes"];
 const C2_4 = ["yes", "yes", "yes", "no", "no"];
+const A2_4 = ["yes", "yes", "no", "yes", "yes", "yes", "no"];
 
 const options = [
   [
@@ -67,7 +73,7 @@ export default function Questions() {
 
   const handleAnswer = (answer) => {
     const newAnswersArray = answersArray.push(answer);
-    if (count < 7) {
+    if (count < 8) {
       setQuestionDisplay(questionArray[count]);
       setCount(count + 1);
 
@@ -84,11 +90,20 @@ export default function Questions() {
         setResult(options[0]);
       }
 
+      if (stringArray === A1_Jump.toString()) {
+        setCount(5);
+      }
+
+      if (stringArray === Jump_to_question_5.toString()) {
+        setCount(5);
+      }
+
       //A2:
       if (
         stringArray === A2.toString() ||
         stringArray === A2_2.toString() ||
-        stringArray === A2_3.toString()
+        stringArray === A2_3.toString() ||
+        stringArray === A2_4.toString()
       ) {
         setFinalPage(true);
         setResult(options[1]);
